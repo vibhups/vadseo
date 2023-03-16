@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>ROI Calculator</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  </head>
+  <body>
+    <h1>ROI Calculator</h1>
+    <form id="roi-form">
+      <div>
+        <label for="platform">Select Platform:</label>
+        <select id="platform" name="platform">
+          <option value="google">Google Ads</option>
+          <option value="facebook">Facebook Ads</option>
+          <option value="instagram">Instagram Ads</option>
+          <option value="twitter">Twitter Ads</option>
+        </select>
+      </div>
+      <div>
+        <label for="ad-budget">Ad Budget:</label>
+        <input type="number" id="ad-budget" name="ad-budget" required>
+      </div>
+      <div>
+        <label for="quality-score">Quality Score:</label>
+        <input type="number" id="quality-score" name="quality-score" required>
+      </div>
+      <div>
+        <label for="max-bid">Max Bid:</label>
+        <input type="number" id="max-bid" name="max-bid" required>
+      </div>
+      <button type="submit">Calculate ROI</button>
+    </form>
+    <div id="roi-results" style="display:none">
+      <h2>ROI Results:</h2>
+      <p id="cpc-result"></p>
+      <p id="cost-of-conversion-result"></p>
+      <p id="roi-result"></p>
+    </div>
+    <script>
+      function calculateROI(event) {
+        event.preventDefault();
+        const form = document.getElementById("roi-form");
+        const platform = form.elements["platform"].value;
+        const adBudget = parseFloat(form.elements["ad-budget"].value);
+        const qualityScore = parseFloat(form.elements["quality-score"].value);
+        const maxBid = parseFloat(form.elements["max-bid"].value);
+        const cpc = (qualityScore * maxBid) / 10;
+        const costOfConversion = cpc * 2;
+        const roi = ((10 * costOfConversion) / adBudget) * 100;
+        const cpcResult = document.getElementById("cpc-result");
+        const costOfConversionResult = document.getElementById("cost-of-conversion-result");
+        const roiResult = document.getElementById("roi-result");
+        cpcResult.innerHTML = `CPC: $${cpc.toFixed(2)}`;
+        costOfConversionResult.innerHTML = `Cost of Conversion: $${costOfConversion.toFixed(2)}`;
+        roiResult.innerHTML = `ROI: ${roi.toFixed(2)}%`;
+        document.getElementById("roi-results").style.display = "block";
+      }
+      const form = document.getElementById("roi-form");
+      form.addEventListener("submit", calculateROI);
+    </script>
+  </body>
+</html>
