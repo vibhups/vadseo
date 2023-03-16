@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>ROI Calculator</title>
+    <style>
+      /* CSS styles for the form elements */
+      /* ... */
+    </style>
+  </head>
+  <body>
+    <h1>ROI Calculator</h1>
+    <form id="roi-form">
+      <div>
+        <label for="ad-type">Type of Ad:</label>
+        <select id="ad-type" name="ad-type" multiple>
+          <option value="lead-generation">Lead Generation</option>
+          <option value="search">Search</option>
+          <option value="performance">Performance</option>
+          <option value="app">App</option>
+          <option value="video">Video</option>
+          <option value="shopping">Shopping</option>
+          <option value="local">Local</option>
+          <option value="discovery">Discovery</option>
+          <option value="smart">Smart</option>
+        </select>
+      </div>
+      <div>
+        <label for="platforms">Platforms:</label><br>
+        <input type="checkbox" id="google-ads" name="platforms" value="Google Ads">
+        <label for="google-ads">Google Ads</label><br>
+        <input type="checkbox" id="facebook" name="platforms" value="Facebook">
+        <label for="facebook">Facebook</label><br>
+        <input type="checkbox" id="instagram" name="platforms" value="Instagram">
+        <label for="instagram">Instagram</label><br>
+        <input type="checkbox" id="twitter" name="platforms" value="Twitter">
+        <label for="twitter">Twitter</label><br>
+        <input type="checkbox" id="linkedin" name="platforms" value="LinkedIn">
+        <label for="linkedin">LinkedIn</label><br>
+        <input type="checkbox" id="pinterest" name="platforms" value="Pinterest">
+        <label for="pinterest">Pinterest</label><br>
+        <input type="checkbox" id="snapchat" name="platforms" value="Snapchat">
+        <label for="snapchat">Snapchat</label><br>
+        <input type="checkbox" id="tiktok" name="platforms" value="TikTok">
+        <label for="tiktok">TikTok</label><br>
+      </div>
+      <div>
+        <label for="budget">Total Budget:</label>
+        <input type="number" id="budget" name="budget" placeholder="Enter total budget">
+      </div>
+      <div>
+        <input type="submit" value="Calculate ROI">
+      </div>
+    </form>
+    <script src="script.js"></script>
+  </body>
+</html>
+
+
+// Select the form element
+const roiForm = document.querySelector('#roi-form');
+
+// Add event listener to the form's submit button
+roiForm.addEventListener('submit', function(event) {
+  event.preventDefault(); // Prevent form from submitting
+  
+  // Get the selected type(s) of ads
+  const adTypeSelect = document.querySelector('#ad-type');
+  const adTypeOptions = adTypeSelect.selectedOptions;
+  const adTypes = [];
+  for (let i = 0; i < adTypeOptions.length; i++) {
+    adTypes.push(adTypeOptions[i].value);
+
+
+
+<div>
+  <label for="platforms">Platforms:</label><br>
+  <input type="checkbox" id="google-ads" name="platforms[]" value="Google Ads">
+  <label for="google-ads">Google Ads</label><br>
+  <input type="checkbox" id="facebook" name="platforms[]" value="Facebook">
+  <label for="facebook">Facebook</label><br>
+  <input type="checkbox" id="instagram" name="platforms[]" value="Instagram">
+  <label for="instagram">Instagram</label><br>
+  <input type="checkbox" id="twitter" name="platforms[]" value="Twitter">
+  <label for="twitter">Twitter</label><br>
+  <input type="checkbox" id="linkedin" name="platforms[]" value="LinkedIn">
+  <label for="linkedin">LinkedIn</label><br>
+  <input type="checkbox" id="pinterest" name="platforms[]" value="Pinterest">
+  <label for="pinterest">Pinterest</label><br>
+  <input type="checkbox" id="snapchat" name="platforms[]" value="Snapchat">
+  <label for="snapchat">Snapchat</label><br>
+  <input type="checkbox" id="tiktok" name="platforms[]" value="TikTok">
+  <label for="tiktok">TikTok</label><br>
+</div>
+<div>
+  <label for="budget">Total Budget:</label>
+  <input type="number" id="budget" name="budget" min="0" step="100" required>
+</div>
+
+
+  // calculate ROI for each platform
+  let roiTableData = [];
+  platforms.forEach(platform => {
+    let roi = (revenue[platform] - cost[platform]) / cost[platform] * 100;
+    roiTableData.push({
+      platform: platform,
+      cost: cost[platform].toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 }),
+      revenue: revenue[platform].toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 }),
+      roi: roi.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + '%'
+    });
+  });
+
+  // display results in table format
+  let table = document.createElement('table');
+  let headerRow = table.insertRow();
+  let headers = ['Platform', 'Cost', 'Revenue', 'ROI'];
+  headers.forEach(header => {
+    let cell = headerRow.insertCell();
+    cell.appendChild(document.createTextNode(header));
+  });
+  roiTableData.forEach(rowData => {
+    let row = table.insertRow();
+    Object.values(rowData).forEach(value => {
+      let cell = row.insertCell();
+      cell.appendChild(document.createTextNode(value));
+    });
+  });
+  document.body.appendChild(table);
+
+// Display results in table format
+if (valid) {
+  const table = document.createElement("table");
+  const tableHead = document.createElement("thead");
+  const tableBody = document.createElement("tbody");
+  const tableHeadRow = document.createElement("tr");
+
+  // Create table header
+  const headings = ["Platform", "Estimated Cost", "Estimated Conversions", "Estimated ROI"];
+  for (let i = 0; i < headings.length; i++) {
+    const headingCell = document.createElement("th");
+    const headingText = document.createTextNode(headings[i]);
+    headingCell.appendChild(headingText);
+    tableHeadRow.appendChild(headingCell);
+  }
+  tableHead.appendChild(tableHeadRow);
+  table.appendChild(tableHead);
+
+  // Create table body
+  for (let i = 0; i < platforms.length; i++) {
+    const platformRow = document.createElement("tr");
+    const platformName = document.createElement("td");
+    const platformCost = document.createElement("td");
+    const platformConversions = document.createElement("td");
+    const platformROI = document.createElement("td");
+    const platformNameText = document.createTextNode(platforms[i]);
+    const platformCostText = document.createTextNode("$" + estimatedCost[i].toFixed(2));
+    const platformConversionsText = document.createTextNode(estimatedConversions[i]);
+    const platformROIText = document.createTextNode(estimatedROI[i].toFixed(2) + "%");
+    platformName.appendChild(platformNameText);
+    platformCost.appendChild(platformCostText);
+    platformConversions.appendChild(platformConversionsText);
+    platformROI.appendChild(platformROIText);
+    platformRow.appendChild(platformName);
+    platformRow.appendChild(platformCost);
+    platformRow.appendChild(platformConversions);
+    platformRow.appendChild(platformROI);
+    tableBody.appendChild(platformRow);
+  }
+  table.appendChild(tableBody);
+  document.body.appendChild(table);
+}
+
+
+<table id="roi-table">
+  <thead>
+    <tr>
+      <th>Ad Type</th>
+      <th>Platform</th>
+      <th>Cost</th>
+      <th>Leads/Sales</th>
+      <th>ROI</th>
+    </tr>
+  </thead>
+  <tbody>
+  </tbody>
+</table>
+
+
+const roiTable = document.getElementById('roi-table').getElementsByTagName('tbody')[0];
+
+function displayResults(results) {
+  // Clear the existing table rows
+  roiTable.innerHTML = '';
+
+  // Loop through the results and create a new row for each one
+  results.forEach(result => {
+    const row = roiTable.insertRow();
+
+    // Insert the ad type, platform, cost, leads/sales, and ROI values into the row
+    const adTypeCell = row.insertCell();
+    adTypeCell.appendChild(document.createTextNode(result.adType));
+
+    const platformCell = row.insertCell();
+    platformCell.appendChild(document.createTextNode(result.platform));
+
+    const costCell = row.insertCell();
+    costCell.appendChild(document.createTextNode(result.cost.toFixed(2)));
+
+    const leadsSalesCell = row.insertCell();
+    leadsSalesCell.appendChild(document.createTextNode(result.leadsSales));
+
+    const roiCell = row.insertCell();
+    roiCell.appendChild(document.createTextNode(result.roi.toFixed(2)));
+  });
+}
