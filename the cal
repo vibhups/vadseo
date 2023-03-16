@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Ad ROI Estimator</title>
+	<script>
+		// Define a function to calculate ROI based on the selected ad type and platform
+		function calculateROI(adType, platform, budget) {
+			let roi;
+			// Set the ROI based on the selected ad type and platform
+			switch(adType) {
+				case 'Facebook':
+					switch(platform) {
+						case 'Mobile':
+							roi = 2.5;
+							break;
+						case 'Desktop':
+							roi = 3;
+							break;
+						default:
+							roi = 0;
+							break;
+					}
+					break;
+				case 'Google':
+					switch(platform) {
+						case 'Mobile':
+							roi = 2;
+							break;
+						case 'Desktop':
+							roi = 2.5;
+							break;
+						default:
+							roi = 0;
+							break;
+					}
+					break;
+				case 'Twitter':
+					switch(platform) {
+						case 'Mobile':
+							roi = 2.2;
+							break;
+						case 'Desktop':
+							roi = 2.8;
+							break;
+						default:
+							roi = 0;
+							break;
+					}
+					break;
+				default:
+					roi = 0;
+					break;
+			}
+			// Calculate the estimated revenue based on the ROI and budget
+			let revenue = roi * budget;
+			// Calculate the estimated profit by subtracting the budget from the revenue
+			let profit = revenue - budget;
+			// Return the ROI, revenue, and profit as an object
+			return {roi: roi, revenue: revenue, profit: profit};
+		}
+
+		// Define a function to handle the form submission
+		function handleSubmit(event) {
+			// Prevent the form from submitting
+			event.preventDefault();
+			// Get the selected ad type and platform
+			let adType = document.querySelector('input[name="adType"]:checked').value;
+			let platform = document.querySelector('input[name="platform"]:checked').value;
+			// Get the budget from the form
+			let budget = parseFloat(document.getElementById('budget').value);
+			// Calculate the ROI, revenue, and profit based on the selected options and budget
+			let result = calculateROI(adType, platform, budget);
+			// Display the results in a table
+			let table = document.getElementById('results');
+			table.innerHTML = '';
+			let header = table.createTHead();
+			let row = header.insertRow();
+			let cell1 = row.insertCell();
+			let cell2 = row.insertCell();
+			let cell3 = row.insertCell();
+			cell1.innerHTML = '<b>ROI</b>';
+			cell2.innerHTML = '<b>Revenue</b>';
+			cell3.innerHTML = '<b>Profit</b>';
+			let body = table.createTBody();
+			row = body.insertRow();
+			cell1 = row.insertCell();
+			cell2 = row.insertCell();
+			cell3 = row.insertCell();
+			cell1.innerHTML = result.roi.toFixed(2);
+			cell2.innerHTML = '$' + result.revenue.toFixed(2);
+			cell3.innerHTML = '$' + result.profit.toFixed(2);
+		}
+	</script>
+</head>
+<body>
+	<h1>Ad ROI Estimator</h1>
+	<form onsubmit="handleSubmit(event)">
+		<p>Select ad type:</p>
+	  	<input type="checkbox" name="platform" value="Facebook">Facebook<br>
+			<input type="checkbox" name="platform" value="Google">Google<br>
+			<input type="checkbox" name="platform" value="Instagram">Instagram<br>
+			<p>Select ad type(s):</p>
+			<input type="checkbox" name="adType" value="Display">Display<br>
+			<input type="checkbox" name="adType" value="Search">Search<br>
+			<input type="checkbox" name="adType" value="Video">Video<br>
+			<label for="budget">Enter budget:</label>
+			<input type="number" id="budget" name="budget" min="0" step="100" required><br><br>
+			<input type="submit" value="Calculate">
+		</form>
+		<br>
+		<table id="results">
+			<tr>
+				<th>Platform</th>
+				<th>Ad Type</th>
+				<th>ROI</th>
+			</tr>
+		</table>
+		<script>
+			function handleSubmit(event) {
+				event.preventDefault();
+				const platforms = document.querySelectorAll('input[name="platform"]:checked');
+				const adTypes = document.querySelectorAll('input[name="adType"]:checked');
+				const budget = Number(document.getElementById("budget").value);
+				const resultsTable = document.getElementById("results");
+				resultsTable.innerHTML = `
+					<tr>
+						<th>Platform</th>
+						<th>Ad Type</th>
+						<th>ROI</th>
+					</tr>
+				`;
+				for (let i = 0; i < platforms.length; i++) {
+					for (let j = 0; j < adTypes.length; j++) {
+						const platform = platforms[i].value;
+						const adType = adTypes[j].value;
+						const roi = calculateROI(platform, adType, budget);
+						resultsTable.innerHTML += `
+							<tr>
+								<td>${platform}</td>
+								<td>${adType}</td>
+								<td>${roi.toFixed(2)}%</td>
+							</tr>
+						`;
+					}
+				}
+			}
+			function calculateROI(platform, adType, budget) {
+				// Calculation logic goes here
+			function calculateROI() {
+  const budget = Number(document.getElementById("budget-input").value);
+  const platform = document.getElementById("platform-select").value;
+  const adType = document.querySelector('input[name="ad-type"]:checked').value;
+  let revenue;
+
+  if (platform === "Facebook") {
+    if (adType === "video") {
+      revenue = budget * 0.3;
+    } else if (adType === "image") {
+      revenue = budget * 0.2;
+    }
+  } else if (platform === "Google") {
+    if (adType === "video") {
+      revenue = budget * 0.4;
+    } else if (adType === "image") {
+      revenue = budget * 0.3;
+    }
+  } else if (platform === "Instagram") {
+    if (adType === "video") {
+      revenue = budget * 0.5;
+    } else if (adType === "image") {
+      revenue = budget * 0.4;
+    }
+  }
+
+  const roi = ((revenue - budget) / budget) * 100;
+  const roundedRoi = Math.round(roi * 100) / 100;
+
+  const result = document.getElementById("result");
+  result.innerHTML = `Estimated ROI: ${roundedRoi}%`;
+}
+
+			}
+		</script>
+	</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
